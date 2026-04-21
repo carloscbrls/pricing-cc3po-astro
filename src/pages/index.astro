@@ -9,11 +9,11 @@ const plans = [
 		type: 'One-Time Services',
 		icon: '🚀',
 		items: [
-			{ name: 'Website Audit', price: '$299' },
-			{ name: 'Basic WordPress Setup', price: '$499' },
-			{ name: 'Content Migration', price: '$799' },
-			{ name: 'Security Hardening', price: '$349' },
-			{ name: 'Performance Optimization', price: '$449' }
+			{ name: 'Website Audit', price: '$299', link: 'https://buy.stripe.com/6oUaEWcEma3l5Pm7Kc1B60l' },
+			{ name: 'Basic WordPress Setup', price: '$499', link: 'https://buy.stripe.com/4gMdR8cEmdfx4Li9Sk1B60s' },
+			{ name: 'Content Migration', price: '$799', link: 'https://buy.stripe.com/bJefZgcEmejBcdKe8A1B60t' },
+			{ name: 'Security Hardening', price: '$349', link: 'https://buy.stripe.com/aFa8wO9sa8ZhfpWaWo1B60u' },
+			{ name: 'Performance Optimization', price: '$449', link: 'https://buy.stripe.com/28EeVccEm1wP7XufcE1B60v' }
 		],
 		cta: 'Get Started',
 		link: 'https://offers.cc3po.com/contact',
@@ -24,11 +24,12 @@ const plans = [
 		type: 'Monthly Retainers',
 		icon: '📈',
 		items: [
-			{ name: 'WordPress Care', price: '$199/mo', note: 'Updates, backups, security' },
-			{ name: 'AI Automation', price: '$499/mo', note: 'Workflows, integrations' },
-			{ name: 'Content Creation', price: '$799/mo', note: 'Blog posts, social content' },
-			{ name: 'SEO Management', price: '$599/mo', note: 'On-page + off-page' },
-			{ name: 'Full-Service', price: '$1,499/mo', note: 'Everything combined' }
+			{ name: 'WordPress Care - Starter', price: '$99/mo', note: 'Updates, backups, security', link: 'https://buy.stripe.com/6oUcN4gUCdfx91y7Kc1B60m' },
+			{ name: 'WordPress Care - Growth', price: '$249/mo', note: 'Priority support', link: 'https://buy.stripe.com/6oUcN4dIq8ZhdhO4y01B60n' },
+			{ name: 'AI Automation', price: '$499/mo', note: 'Workflows, integrations', link: 'https://buy.stripe.com/6oU28qgUC3EX4LiaWo1B60h' },
+			{ name: 'Content Creation', price: '$799/mo', note: 'Blog posts, social content', link: 'https://buy.stripe.com/bJe6oG1ZIdfx91y6G81B60i' },
+			{ name: 'SEO Management', price: '$599/mo', note: 'On-page + off-page', link: 'https://buy.stripe.com/aFa28q6fYfnFfpWggI1B60j' },
+			{ name: 'Full-Service', price: '$1,499/mo', note: 'Everything combined', link: 'https://buy.stripe.com/dRm28q9sab7p0v2c0s1B60o' }
 		],
 		cta: 'Start Growing',
 		link: 'https://offers.cc3po.com/contact',
@@ -39,11 +40,11 @@ const plans = [
 		type: 'Custom Solutions',
 		icon: '🏢',
 		items: [
+			{ name: 'WordPress Care - Enterprise', price: '$499/mo', note: 'Dedicated support', link: 'https://buy.stripe.com/3cI8wOdIq2AT0v23tW1B60k' },
+			{ name: 'Website Audit - Full', price: '$599', link: 'https://buy.stripe.com/00w00i0VEfnF3HeaWo1B60f' },
+			{ name: 'Website Audit - Enterprise', price: '$1,499', link: 'https://buy.stripe.com/3cI28qbAi7VdelSaWo1B60g' },
 			{ name: 'Custom Development', price: 'Custom' },
-			{ name: 'Dedicated Support', price: 'Custom' },
-			{ name: 'Custom Integrations', price: 'Custom' },
-			{ name: 'White-Label Services', price: 'Custom' },
-			{ name: 'Priority SLA', price: 'Custom' }
+			{ name: 'White-Label Services', price: 'Custom' }
 		],
 		cta: 'Contact Us',
 		link: 'https://offers.cc3po.com/contact',
@@ -56,25 +57,29 @@ const addons = [
 		name: 'SEO Audit Package',
 		price: '$599',
 		description: 'Complete SEO analysis with keyword research and competitor insights',
-		icon: '🔍'
+		icon: '🔍',
+		link: 'https://buy.stripe.com/bJe14m0VEfnF6Tq4y01B60w'
 	},
 	{
 		name: 'Security Audit',
 		price: '$399',
 		description: 'Vulnerability assessment, malware scan, and security recommendations',
-		icon: '🛡️'
+		icon: '🛡️',
+		link: 'https://buy.stripe.com/dRmcN45bU4J191ye8A1B60y'
 	},
 	{
 		name: 'Performance Audit',
 		price: '$299',
 		description: 'Speed optimization, caching setup, and Core Web Vitals improvement',
-		icon: '⚡'
+		icon: '⚡',
+		link: 'https://buy.stripe.com/5kQ9AS33M4J11z66G81B60z'
 	},
 	{
 		name: 'Accessibility Audit',
 		price: '$449',
 		description: 'WCAG compliance check and remediation recommendations',
-		icon: '♿'
+		icon: '♿',
+		link: 'https://buy.stripe.com/bJe28q33Mcbt4Li9Sk1B60x'
 	}
 ];
 
@@ -260,6 +265,12 @@ const faqs = [
 			-webkit-text-fill-color: transparent;
 			font-size: 15px;
 		}
+		.item-price:hover {
+			text-decoration: underline;
+		}
+		a.item-price {
+			text-decoration: none;
+		}
 		.card-cta {
 			display: block;
 			text-align: center;
@@ -300,6 +311,9 @@ const faqs = [
 			border-radius: 16px;
 			padding: 24px;
 			transition: all 0.3s;
+			text-decoration: none;
+			color: inherit;
+			display: block;
 		}
 		.addon-card:hover {
 			border-color: rgba(107,53,255,.3);
@@ -447,7 +461,11 @@ const faqs = [
 									{item.name}
 									{item.note && <span class="note">{item.note}</span>}
 								</span>
-								<span class="item-price">{item.price}</span>
+								{item.link ? (
+									<a href={item.link} class="item-price" target="_blank" rel="noopener">{item.price} →</a>
+								) : (
+									<span class="item-price">{item.price}</span>
+								)}
 							</li>
 						))}
 					</ul>
@@ -465,12 +483,12 @@ const faqs = [
 		
 		<div class="addons-grid">
 			{addons.map((addon) => (
-				<div class="addon-card">
+				<a href={addon.link} class="addon-card" target="_blank" rel="noopener">
 					<div class="addon-icon">{addon.icon}</div>
 					<h4>{addon.name}</h4>
 					<p>{addon.description}</p>
-					<span class="addon-price">{addon.price}</span>
-				</div>
+					<span class="addon-price">{addon.price} →</span>
+				</a>
 			))}
 		</div>
 	</section>
