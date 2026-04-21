@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import TrustBar from '../components/TrustBar.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = 'https://cc3po.com/wp-content/uploads/2025/04/Color-logo-with-background-scaled.png';
+
 const plans = [
 	{
 		name: 'Starter',
@@ -112,6 +115,37 @@ const faqs = [
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<slot name="head" slot="head">
+		<link rel="canonical" href={canonicalURL} />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={SITE_TITLE} />
+		<meta property="og:description" content={SITE_DESCRIPTION} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={SITE_TITLE} />
+		<meta name="twitter:description" content={SITE_DESCRIPTION} />
+		<meta name="twitter:image" content={ogImage} />
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "PriceSpecification",
+			"name": "CC3PO Pricing",
+			"description": "Transparent pricing for WordPress care, AI automation, and web development services",
+			"url": canonicalURL,
+			"provider": {
+				"@type": "Organization",
+				"name": "CC3PO",
+				"url": "https://cc3po.com"
+			},
+			"offers": plans.map(plan => ({
+				"@type": "Offer",
+				"name": plan.name,
+				"description": plan.type,
+				"url": plan.link
+			}))
+		})} />
+	</slot>
+
 	<style>
 		/* Hero Section */
 		.hero {
@@ -195,11 +229,12 @@ const faqs = [
 			border-radius: 20px;
 			padding: 32px;
 			position: relative;
-			transition: all 0.3s;
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		}
 		.pricing-card:hover {
 			border-color: rgba(107,53,255,.2);
 			transform: translateY(-4px);
+			box-shadow: 0 20px 40px rgba(107, 53, 255, 0.1);
 		}
 		.pricing-card.featured {
 			border-color: var(--primary);
@@ -310,7 +345,7 @@ const faqs = [
 			border: 1px solid rgba(255,255,255,.06);
 			border-radius: 16px;
 			padding: 24px;
-			transition: all 0.3s;
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 			text-decoration: none;
 			color: inherit;
 			display: block;
@@ -462,7 +497,7 @@ const faqs = [
 									{item.note && <span class="note">{item.note}</span>}
 								</span>
 								{item.link ? (
-									<a href={item.link} class="item-price" target="_blank" rel="noopener">{item.price} →</a>
+									<a href={item.link} class="item-price" target="_blank" rel="noopener noreferrer">{item.price} →</a>
 								) : (
 									<span class="item-price">{item.price}</span>
 								)}
@@ -483,7 +518,7 @@ const faqs = [
 		
 		<div class="addons-grid">
 			{addons.map((addon) => (
-				<a href={addon.link} class="addon-card" target="_blank" rel="noopener">
+				<a href={addon.link} class="addon-card" target="_blank" rel="noopener noreferrer">
 					<div class="addon-icon">{addon.icon}</div>
 					<h4>{addon.name}</h4>
 					<p>{addon.description}</p>
