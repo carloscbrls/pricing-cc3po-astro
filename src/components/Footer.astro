@@ -1,0 +1,68 @@
+---
+import { SITE_TITLE } from '../consts';
+---
+
+<footer class="footer">
+	<div class="footer-inner">
+		<div class="footer-brand">
+			<span class="footer-logo">⚡</span>
+			<span>{SITE_TITLE}</span>
+		</div>
+		<div class="footer-links">
+			<a href="https://cc3po.com">Home</a>
+			<a href="https://offers.cc3po.com">Services</a>
+			<a href="https://insights.cc3po.com">Blog</a>
+			<a href="https://offers.cc3po.com/contact">Contact</a>
+		</div>
+		<p class="footer-copy">© 2024 CC3PO. Building automated businesses.</p>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		background: linear-gradient(180deg, #0a0a0b, #050506);
+		border-top: 1px solid rgba(255, 255, 255, 0.06);
+		padding: 40px 24px;
+	}
+	.footer-inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.footer-brand {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		font-weight: 700;
+		font-size: 18px;
+		color: #fff;
+		margin-bottom: 16px;
+	}
+	.footer-logo {
+		font-size: 24px;
+	}
+	.footer-links {
+		display: flex;
+		justify-content: center;
+		gap: 24px;
+		margin-bottom: 16px;
+	}
+	.footer-links a {
+		color: #a1a1aa;
+		text-decoration: none;
+		font-size: 14px;
+		transition: color 0.2s;
+	}
+	.footer-links a:hover {
+		color: #fff;
+	}
+	.footer-copy {
+		color: #71717a;
+		font-size: 13px;
+	}
+	@media (max-width: 768px) {
+		.footer { padding: 32px 16px; }
+		.footer-links { flex-wrap: wrap; gap: 16px; }
+	}
+</style>

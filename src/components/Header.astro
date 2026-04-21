@@ -1,0 +1,87 @@
+---
+import { SITE_TITLE } from '../consts';
+---
+
+<header class="header">
+	<div class="header-inner">
+		<a href="/" class="logo">
+			<span class="logo-icon">⚡</span>
+			<span class="logo-text">{SITE_TITLE}</span>
+		</a>
+		<nav class="nav">
+			<a href="https://cc3po.com">Main Site</a>
+			<a href="https://offers.cc3po.com">Services</a>
+			<a href="https://insights.cc3po.com">Blog</a>
+			<a href="https://offers.cc3po.com/contact" class="nav-cta">Get Started</a>
+		</nav>
+	</div>
+</header>
+
+<style>
+	.header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 100;
+		background: rgba(10, 10, 11, 0.85);
+		backdrop-filter: blur(12px);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+	}
+	.header-inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 16px 24px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		text-decoration: none;
+		color: #fff;
+		font-weight: 700;
+		font-size: 18px;
+	}
+	.logo-icon {
+		font-size: 24px;
+	}
+	.logo-text {
+		background: linear-gradient(135deg, #fff, #a78bfa);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.nav {
+		display: flex;
+		align-items: center;
+		gap: 32px;
+	}
+	.nav a {
+		color: #a1a1aa;
+		text-decoration: none;
+		font-size: 14px;
+		font-weight: 500;
+		transition: color 0.2s;
+	}
+	.nav a:hover {
+		color: #fff;
+	}
+	.nav-cta {
+		padding: 10px 20px;
+		background: linear-gradient(135deg, #6b35ff, #00d2ff);
+		color: #fff !important;
+		border-radius: 24px;
+		font-weight: 600;
+		transition: transform 0.2s, box-shadow 0.2s;
+	}
+	.nav-cta:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 15px rgba(107, 53, 255, 0.4);
+	}
+	@media (max-width: 768px) {
+		.header-inner { padding: 12px 16px; }
+		.nav { display: none; }
+	}
+</style>

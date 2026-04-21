@@ -1,0 +1,504 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrustBar from '../components/TrustBar.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const plans = [
+	{
+		name: 'Starter',
+		type: 'One-Time Services',
+		icon: '🚀',
+		items: [
+			{ name: 'Website Audit', price: '$299' },
+			{ name: 'Basic WordPress Setup', price: '$499' },
+			{ name: 'Content Migration', price: '$799' },
+			{ name: 'Security Hardening', price: '$349' },
+			{ name: 'Performance Optimization', price: '$449' }
+		],
+		cta: 'Get Started',
+		link: 'https://offers.cc3po.com/contact',
+		popular: false
+	},
+	{
+		name: 'Growth',
+		type: 'Monthly Retainers',
+		icon: '📈',
+		items: [
+			{ name: 'WordPress Care', price: '$199/mo', note: 'Updates, backups, security' },
+			{ name: 'AI Automation', price: '$499/mo', note: 'Workflows, integrations' },
+			{ name: 'Content Creation', price: '$799/mo', note: 'Blog posts, social content' },
+			{ name: 'SEO Management', price: '$599/mo', note: 'On-page + off-page' },
+			{ name: 'Full-Service', price: '$1,499/mo', note: 'Everything combined' }
+		],
+		cta: 'Start Growing',
+		link: 'https://offers.cc3po.com/contact',
+		popular: true
+	},
+	{
+		name: 'Enterprise',
+		type: 'Custom Solutions',
+		icon: '🏢',
+		items: [
+			{ name: 'Custom Development', price: 'Custom' },
+			{ name: 'Dedicated Support', price: 'Custom' },
+			{ name: 'Custom Integrations', price: 'Custom' },
+			{ name: 'White-Label Services', price: 'Custom' },
+			{ name: 'Priority SLA', price: 'Custom' }
+		],
+		cta: 'Contact Us',
+		link: 'https://offers.cc3po.com/contact',
+		popular: false
+	}
+];
+
+const addons = [
+	{
+		name: 'SEO Audit Package',
+		price: '$599',
+		description: 'Complete SEO analysis with keyword research and competitor insights',
+		icon: '🔍'
+	},
+	{
+		name: 'Security Audit',
+		price: '$399',
+		description: 'Vulnerability assessment, malware scan, and security recommendations',
+		icon: '🛡️'
+	},
+	{
+		name: 'Performance Audit',
+		price: '$299',
+		description: 'Speed optimization, caching setup, and Core Web Vitals improvement',
+		icon: '⚡'
+	},
+	{
+		name: 'Accessibility Audit',
+		price: '$449',
+		description: 'WCAG compliance check and remediation recommendations',
+		icon: '♿'
+	}
+];
+
+const faqs = [
+	{
+		question: 'Do you offer discounts for nonprofits?',
+		answer: 'Yes! We offer 20% off all services for verified nonprofit organizations. We believe in supporting causes that make a difference. Contact us with your nonprofit documentation to receive your discount code.'
+	},
+	{
+		question: "What's included in WordPress Care?",
+		answer: 'WordPress Care includes weekly plugin and theme updates, daily automated backups, security monitoring, uptime monitoring, performance checks, and monthly reports. It also includes minor content updates and priority support for any issues that arise.'
+	},
+	{
+		question: 'Can I switch plans?',
+		answer: 'Absolutely. You can upgrade or downgrade your plan at any time. Changes take effect on your next billing cycle. If you upgrade mid-cycle, we\'ll prorate the difference. No cancellation fees ever.'
+	},
+	{
+		question: 'How do one-time services work?',
+		answer: 'One-time services are scoped upfront with clear deliverables. After payment, we schedule the work and deliver within the agreed timeline. Most audits are delivered within 3-5 business days. Setup and migration services typically take 1-2 weeks.'
+	},
+	{
+		question: 'Do you offer custom quotes?',
+		answer: 'Yes! For Enterprise clients or unique projects, we provide custom quotes tailored to your specific needs. Schedule a free consultation to discuss your requirements and receive a detailed proposal.'
+	},
+	{
+		question: 'What payment methods do you accept?',
+		answer: 'We accept all major credit cards, PayPal, and bank transfers for larger projects. Monthly retainers are billed automatically. One-time services require 50% deposit before work begins, with the balance due on delivery.'
+	}
+];
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<style>
+		/* Hero Section */
+		.hero {
+			min-height: 60vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			padding: 120px 24px 60px;
+			background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(107,53,255,.15), transparent),
+			            radial-gradient(ellipse 50% 40% at 85% 85%, rgba(0,210,255,.08), transparent),
+			            linear-gradient(180deg, rgba(13,13,15,.98), #0a0a0b);
+		}
+		.hero-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 8px 16px;
+			background: rgba(107,53,255,.1);
+			border: 1px solid rgba(107,53,255,.2);
+			border-radius: 24px;
+			font-size: 13px;
+			color: var(--primary);
+			margin-bottom: 20px;
+		}
+		.hero h1 {
+			font-size: clamp(36px, 6vw, 64px);
+			font-weight: 800;
+			background: linear-gradient(135deg, #fff, #a78bfa, #00d2ff);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			margin-bottom: 16px;
+			line-height: 1.1;
+		}
+		.hero p {
+			font-size: clamp(16px, 2vw, 20px);
+			color: var(--muted);
+			max-width: 600px;
+			margin-bottom: 32px;
+		}
+		.hero-subtitle {
+			color: var(--muted);
+			font-size: 14px;
+		}
+		.hero-subtitle a {
+			color: var(--primary);
+			text-decoration: none;
+		}
+		
+		/* Pricing Section */
+		.pricing-section {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 60px 24px;
+		}
+		.section-header {
+			text-align: center;
+			margin-bottom: 48px;
+		}
+		.section-header h2 {
+			font-size: clamp(28px, 4vw, 40px);
+			font-weight: 700;
+			margin-bottom: 12px;
+		}
+		.section-header p {
+			color: var(--muted);
+			font-size: 16px;
+		}
+		
+		/* Pricing Grid */
+		.pricing-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+			gap: 24px;
+			margin-bottom: 60px;
+		}
+		.pricing-card {
+			background: linear-gradient(145deg, #141418, #0f0f11);
+			border: 1px solid rgba(255,255,255,.06);
+			border-radius: 20px;
+			padding: 32px;
+			position: relative;
+			transition: all 0.3s;
+		}
+		.pricing-card:hover {
+			border-color: rgba(107,53,255,.2);
+			transform: translateY(-4px);
+		}
+		.pricing-card.featured {
+			border-color: var(--primary);
+			background: linear-gradient(145deg, rgba(107,53,255,.08), #141418);
+		}
+		.pricing-card.featured::before {
+			content: 'Most Popular';
+			position: absolute;
+			top: -12px;
+			left: 50%;
+			transform: translateX(-50%);
+			background: var(--grad);
+			color: #fff;
+			font-size: 11px;
+			font-weight: 600;
+			padding: 6px 16px;
+			border-radius: 12px;
+		}
+		.card-header {
+			text-align: center;
+			margin-bottom: 24px;
+			padding-bottom: 24px;
+			border-bottom: 1px solid rgba(255,255,255,.06);
+		}
+		.card-icon {
+			font-size: 40px;
+			margin-bottom: 12px;
+		}
+		.card-header h3 {
+			font-size: 24px;
+			margin-bottom: 4px;
+		}
+		.card-header .type {
+			color: var(--muted);
+			font-size: 14px;
+		}
+		.card-items {
+			list-style: none;
+		}
+		.card-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 12px 0;
+			border-bottom: 1px solid rgba(255,255,255,.04);
+		}
+		.card-item:last-child {
+			border-bottom: none;
+		}
+		.item-name {
+			color: #d4d4d8;
+			font-size: 14px;
+		}
+		.item-name .note {
+			display: block;
+			font-size: 12px;
+			color: #71717a;
+		}
+		.item-price {
+			font-weight: 600;
+			background: linear-gradient(135deg, #6b35ff, #00d2ff);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			font-size: 15px;
+		}
+		.card-cta {
+			display: block;
+			text-align: center;
+			padding: 14px 24px;
+			background: var(--grad);
+			color: #fff;
+			border-radius: 28px;
+			text-decoration: none;
+			font-weight: 600;
+			margin-top: 24px;
+			transition: transform 0.2s, box-shadow 0.2s;
+		}
+		.card-cta:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 25px rgba(107,53,255,.4);
+		}
+		.pricing-card.featured .card-cta {
+			box-shadow: 0 4px 15px rgba(107,53,255,.3);
+		}
+		
+		/* Add-ons Section */
+		.addons-section {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 60px 24px;
+			background: linear-gradient(145deg, rgba(107,53,255,.05), transparent);
+			border-top: 1px solid rgba(107,53,255,.1);
+			border-bottom: 1px solid rgba(107,53,255,.1);
+		}
+		.addons-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+			gap: 20px;
+		}
+		.addon-card {
+			background: rgba(20,20,24,.6);
+			border: 1px solid rgba(255,255,255,.06);
+			border-radius: 16px;
+			padding: 24px;
+			transition: all 0.3s;
+		}
+		.addon-card:hover {
+			border-color: rgba(107,53,255,.3);
+			transform: translateY(-2px);
+		}
+		.addon-icon {
+			font-size: 32px;
+			margin-bottom: 12px;
+		}
+		.addon-card h4 {
+			font-size: 18px;
+			margin-bottom: 8px;
+		}
+		.addon-card p {
+			color: var(--muted);
+			font-size: 13px;
+			margin-bottom: 12px;
+		}
+		.addon-price {
+			font-weight: 700;
+			background: linear-gradient(135deg, #6b35ff, #00d2ff);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+		
+		/* FAQ Section */
+		.faq-section {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 60px 24px;
+		}
+		.faq-list {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+		.faq-item {
+			background: linear-gradient(145deg, #141418, #0f0f11);
+			border: 1px solid rgba(255,255,255,.06);
+			border-radius: 16px;
+			padding: 24px;
+		}
+		.faq-item h4 {
+			font-size: 16px;
+			margin-bottom: 12px;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+		.faq-item h4::before {
+			content: '❓';
+			font-size: 18px;
+		}
+		.faq-item p {
+			color: var(--muted);
+			font-size: 14px;
+			line-height: 1.7;
+		}
+		
+		/* CTA Section */
+		.cta-section {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 60px 24px 80px;
+		}
+		.cta-box {
+			background: linear-gradient(145deg, rgba(107,53,255,.12), rgba(0,210,255,.08));
+			border: 1px solid rgba(107,53,255,.2);
+			border-radius: 24px;
+			padding: 48px;
+			text-align: center;
+		}
+		.cta-box h2 {
+			font-size: clamp(24px, 4vw, 32px);
+			margin-bottom: 12px;
+		}
+		.cta-box p {
+			color: var(--muted);
+			margin-bottom: 24px;
+		}
+		.cta-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 16px 36px;
+			background: var(--grad);
+			color: #fff;
+			border-radius: 28px;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 16px;
+			transition: transform 0.2s, box-shadow 0.2s;
+		}
+		.cta-btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 30px rgba(107,53,255,.5);
+		}
+		.cta-note {
+			margin-top: 16px;
+			font-size: 13px;
+			color: #71717a;
+		}
+		
+		@media (max-width: 768px) {
+			.hero { padding: 100px 16px 40px; }
+			.pricing-section { padding: 40px 16px; }
+			.pricing-grid { grid-template-columns: 1fr; }
+			.addons-section { padding: 40px 16px; }
+			.faq-section { padding: 40px 16px; }
+			.cta-section { padding: 40px 16px 60px; }
+			.cta-box { padding: 32px 24px; }
+		}
+	</style>
+	
+	<section class="hero">
+		<div class="hero-badge">
+			<span>⚡</span>
+			<span>Transparent Pricing</span>
+		</div>
+		<h1>Transparent Pricing<br/>No Surprises</h1>
+		<p>Choose the plan that fits your needs. Clear pricing, honest timelines, and no hidden fees.</p>
+		<p class="hero-subtitle">Not sure what you need? <a href="https://offers.cc3po.com/contact">Schedule a free consultation →</a></p>
+	</section>
+	
+	<TrustBar />
+	
+	<section class="pricing-section">
+		<div class="section-header">
+			<h2>Service Packages</h2>
+			<p>From one-time audits to full-service automation</p>
+		</div>
+		
+		<div class="pricing-grid">
+			{plans.map((plan) => (
+				<div class={`pricing-card ${plan.popular ? 'featured' : ''}`}>
+					<div class="card-header">
+						<div class="card-icon">{plan.icon}</div>
+						<h3>{plan.name}</h3>
+						<span class="type">{plan.type}</span>
+					</div>
+					<ul class="card-items">
+						{plan.items.map((item) => (
+							<li class="card-item">
+								<span class="item-name">
+									{item.name}
+									{item.note && <span class="note">{item.note}</span>}
+								</span>
+								<span class="item-price">{item.price}</span>
+							</li>
+						))}
+					</ul>
+					<a href={plan.link} class="card-cta">{plan.cta} →</a>
+				</div>
+			))}
+		</div>
+	</section>
+	
+	<section class="addons-section">
+		<div class="section-header">
+			<h2>Add-On Services</h2>
+			<p>Enhance any package with these specialized audits</p>
+		</div>
+		
+		<div class="addons-grid">
+			{addons.map((addon) => (
+				<div class="addon-card">
+					<div class="addon-icon">{addon.icon}</div>
+					<h4>{addon.name}</h4>
+					<p>{addon.description}</p>
+					<span class="addon-price">{addon.price}</span>
+				</div>
+			))}
+		</div>
+	</section>
+	
+	<section class="faq-section">
+		<div class="section-header">
+			<h2>Frequently Asked Questions</h2>
+			<p>Common questions about our pricing and services</p>
+		</div>
+		
+		<div class="faq-list">
+			{faqs.map((faq) => (
+				<div class="faq-item">
+					<h4>{faq.question}</h4>
+					<p>{faq.answer}</p>
+				</div>
+			))}
+		</div>
+	</section>
+	
+	<section class="cta-section">
+		<div class="cta-box">
+			<h2>Not Sure What You Need?</h2>
+			<p>Schedule a free 15-minute consultation. We'll assess your needs and recommend the right services.</p>
+			<a href="https://offers.cc3po.com/contact" class="cta-btn">
+				Schedule Free Consultation →
+			</a>
+			<p class="cta-note">No obligation. No sales pressure. Just honest advice.</p>
+		</div>
+	</section>
+</Layout>
