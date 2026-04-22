@@ -1,21 +1,37 @@
 ---
-import { SITE_TITLE } from '../consts';
+const navLinks = [
+	{ href: 'https://cc3po.com', label: 'Home' },
+	{ href: 'https://offers.cc3po.com', label: 'Services' },
+	{ href: 'https://insights.cc3po.com', label: 'Blog' },
+];
 ---
 
 <header class="header">
 	<div class="header-inner">
 		<a href="/" class="logo">
 			<span class="logo-icon">⚡</span>
-			<span class="logo-text">{SITE_TITLE}</span>
+			<span class="logo-text">CC3PO</span>
 		</a>
 		<nav class="nav">
-			<a href="https://cc3po.com">Main Site</a>
-			<a href="https://offers.cc3po.com">Services</a>
-			<a href="https://insights.cc3po.com">Blog</a>
+			{navLinks.map(link => (
+				<a href={link.href}>{link.label}</a>
+			))}
 			<a href="https://offers.cc3po.com/contact" class="nav-cta">Get Started</a>
 		</nav>
 	</div>
+	<button class="mobile-toggle" id="nav-toggle" aria-label="Menu">
+		<span></span>
+		<span></span>
+		<span></span>
+	</button>
 </header>
+
+<div class="mobile-menu" id="mobile-menu">
+	{navLinks.map(link => (
+		<a href={link.href}>{link.label}</a>
+	))}
+	<a href="https://offers.cc3po.com/contact" style="background: linear-gradient(135deg, #6b35ff, #00d2ff); color: #fff; text-align: center; border-radius: 8px; margin-top: 12px; padding: 14px;">Get Started</a>
+</div>
 
 <style>
 	.header {
@@ -23,9 +39,9 @@ import { SITE_TITLE } from '../consts';
 		top: 0;
 		left: 0;
 		right: 0;
-		z-index: 100;
-		background: rgba(10, 10, 11, 0.85);
-		backdrop-filter: blur(12px);
+		z-index: 1000;
+		background: rgba(10, 10, 11, 0.9);
+		backdrop-filter: blur(20px);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 	}
 	.header-inner {
@@ -80,8 +96,65 @@ import { SITE_TITLE } from '../consts';
 		transform: translateY(-2px);
 		box-shadow: 0 4px 15px rgba(107, 53, 255, 0.4);
 	}
+	.mobile-toggle {
+		display: none;
+		flex-direction: column;
+		gap: 5px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 10px;
+		position: absolute;
+		right: 16px;
+	}
+	.mobile-toggle span {
+		display: block;
+		width: 24px;
+		height: 2px;
+		background: #fff;
+		transition: all 0.3s;
+	}
+	.mobile-menu {
+		display: none;
+		position: fixed;
+		top: 65px;
+		left: 0;
+		right: 0;
+		background: rgba(10, 10, 11, 0.98);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+		padding: 20px;
+		flex-direction: column;
+		gap: 0;
+		z-index: 999;
+	}
+	.mobile-menu.active {
+		display: flex;
+	}
+	.mobile-menu a {
+		display: block;
+		padding: 14px 0;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		color: #a1a1aa;
+		font-size: 16px;
+		text-decoration: none;
+	}
+	.mobile-menu a:hover {
+		color: #fff;
+	}
 	@media (max-width: 768px) {
 		.header-inner { padding: 12px 16px; }
 		.nav { display: none; }
+		.mobile-toggle { display: flex; }
 	}
 </style>
+
+<script>
+	document.getElementById('nav-toggle')?.addEventListener('click', () => {
+		document.getElementById('mobile-menu')?.classList.toggle('active');
+	});
+	document.querySelectorAll('.mobile-menu a').forEach(link => {
+		link.addEventListener('click', () => {
+			document.getElementById('mobile-menu')?.classList.remove('active');
+		});
+	});
+</script>
